@@ -1,0 +1,149 @@
+.asset.selected {
+  z-index: 1;
+}
+.asset .edit-controls {
+  position: absolute;
+  bottom: auto;
+}
+
+.resizable {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.resizable img {
+  width: 100%;
+  height: 100%;
+}
+.resizable .resize-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+}
+.resizable .resize-frame .resize-handle {
+  width: 15px;
+  height: 15px;
+  /* border-radius: 50%; */
+  background: white;
+  border: 1px solid #000000;
+  position: absolute;
+}
+.resizable .resize-frame .resize-handle.top-left {
+  left: -5px;
+  top: -5px;
+  cursor: nwse-resize;
+}
+.resizable .resize-frame .resize-handle.top-right {
+  right: -5px;
+  top: -5px;
+  cursor: nesw-resize;
+}
+.resizable .resize-frame .resize-handle.bottom-left {
+  left: -5px;
+  bottom: -5px;
+  cursor: nesw-resize;
+}
+.resizable .resize-frame .resize-handle.bottom-right {
+  right: -5px;
+  bottom: -5px;
+  cursor: nwse-resize;
+}
+
+[contenteditable=false] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 1px dotted black;
+}
+[contenteditable=false], [contenteditable=false]:focus {
+  outline: 0px solid transparent;
+}
+
+[contenteditable=true] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+  border: 1px solid lightblue;
+}
+
+[contenteditable] {
+  height: 100%;
+  background: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.sidepane {
+  height: 100%;
+  background: #E8E8EA;
+}
+.sidepane .form {
+  height: 80px;
+  margin: 10px 0;
+}
+.sidepane .assets {
+  width: 100%;
+}
+.sidepane .assets .text, .sidepane .assets .image {
+  margin: 10px 0;
+}
+.sidepane .assets .image ul li {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  display: inline-block;
+  overflow: hidden;
+}
+.sidepane .assets .image ul li img {
+  width: 100%;
+  height: 100%;
+}
+
+#assetText {
+  font-size: 24px;
+}
+
+.canvas .block {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: 10px;
+  border: 1px solid;
+  box-shadow: 0px 0px 5px black;
+}
+
+.item {
+  border: 1px solid transparent;
+  position: absolute;
+}
+.item.selected {
+  border-color: blue;
+}
+
+#artboard {
+  overflow: hidden;
+}
+
+#unit-test {
+  margin: 20px 0;
+}
+
+.image .list-unstyled {
+  float: none;
+}
+
+/*# sourceMappingURL=main.css.map */

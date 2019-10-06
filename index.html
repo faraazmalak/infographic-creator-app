@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Infographic Creator</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+<body>
+
+
+
+<div id="infographic-app">
+
+    <div id="unit-test">
+        Please select a test case from the dropdown:<br/>
+        <select id="unit-test-options" @change="loadTestCase">
+            <option value="0">Please select a test case</option>
+            <option v-for="(testCase,id) in testCases" v-bind:value="id">{{testCase.label}}</option>
+        </select>
+        <p v-if="testCaseDetails != ''">Details: {{testCaseDetails}}</p>
+    </div>
+
+    <!-- side pane -->
+    <div class="sidepane col-sm-2 col-md-2 col-lg-2">
+        <div class="form">
+            <h3>Form</h3>
+
+            <form method="post" action="http://localhost:8000/uploads/" enctype="multipart/form-data">
+                <input type="file" class="form-control" placeholder="Upload Your Images" id="img-upload" name="upload">
+                <button @click="uploadImage" id="submit" class="btn btn-default">upload</button>
+            </form>
+
+            <!-- Upload Form here -->
+        </div>
+        <hr/>
+        <div class="assets">
+            <h3>Assets</h3>
+            <div class="text">
+                <h4>Text</h4>
+                <button id="addText" @click="addToCanvas" class="btn btn-default">Add Text</button>
+            </div>
+            <div class="image">
+                <h4>Images</h4>
+                <ul class="list-unstyled">
+                    <!-- List of images here -->
+                    <li v-for="imgSrc in savedImages">
+                        <div class="image" draggable="true" @dragstart="startAssetDrag">
+                            <img @click="addToCanvas" v-bind:src="imgSrc" class="img-rounded"/>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- canvas -->
+    <div class="canvas col-sm-8 col-md-8 col-lg-8">
+
+        <div id="artboard"  class="block" @drop="dropAsset"
+             @dragover="dragAsset">
+
+            <!-- Below template represents the assets (images / text) placed onto the canvas -->
+            <div v-bind:class='{asset : true, resizable : true, movable : true, selected: asset.resizeFrame}'
+                 v-bind:id="asset.id"
+                 @mousedown="selectAsset"
+                 @drop = "dropOnAsset"
+                 v-on="{mousedown: !asset.editable || asset.type === 'image' ? moveAsset : function(){return false}}"
+                 v-for="(asset,id) in assets"
+
+                 v-bind:style="{top: asset.top, left: asset.left, width: asset.width, height: asset.height}">
+
+                <img v-if="asset.type === 'image'"
+                     class="canvas-image"
+                     v-bind:src="asset.src"/>
+
+                <div v-if="asset.type === 'text'"
+                     v-bind:contenteditable="asset.editable"
+                     class="canvas-text">
+                    {{asset.text}}
+                </div>
+
+                <div class="edit-controls" v-if="asset.assetControls == true">
+                    <button class="remove-asset" @click="removeFromCanvas">
+                        Remove
+                    </button>
+                    <button class="edit-text"
+                            @click="editText"
+                            v-if="asset.type === 'text' && asset.editable === false">
+                        Edit Text
+                    </button>
+                    <button class="save-text"
+                            @click="saveText"
+                            v-if="asset.type === 'text' && asset.editable">
+                        Save Text
+                    </button>
+                </div>
+                <div   v-if="asset.resizeFrame == true"  class='resize-frame'>
+                    <div @mousedown="resizeAsset" class='resize-handle top-left'></div>
+                    <div @mousedown="resizeAsset" class='resize-handle top-right'></div>
+                    <div @mousedown="resizeAsset" class='resize-handle bottom-left'></div>
+                    <div @mousedown="resizeAsset" class='resize-handle bottom-right'></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/vendor/vue.min.js"></script>
+<script type="text/javascript" src="js/vendor/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+
+</body>
+</html>

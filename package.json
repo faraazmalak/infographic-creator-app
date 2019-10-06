@@ -1,0 +1,17 @@
+{
+  "name": "infographic-creator-app",
+  "version": "1.0.0",
+  "description": "infographic creator app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "jquery": "^3.0.0",
+    "junk": "^1.0.2",
+    "multer": "^1.1.0",
+    "nodemon": "^1.9.1"
+  },
+  "devDependencies": {}
+}
